@@ -44,22 +44,21 @@ export default function SkillsCharts({ radarData, barData }: Props) {
         <p className="text-xs uppercase tracking-[0.2em] text-white/50">
           Strength by Domain
         </p>
-        <div className="h-60">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={barData}>
-              <CartesianGrid stroke="#1f2937" />
-              <XAxis dataKey="name" stroke="#94a3b8" />
-              <YAxis domain={[0, 5]} stroke="#94a3b8" />
-              <Tooltip
-                contentStyle={{
-                  background: "#0b0f1a",
-                  border: "1px solid #334155",
-                  color: "#e2e8f0",
-                }}
-              />
-              <Bar dataKey="value" fill="#f4f1ea" />
-            </BarChart>
-          </ResponsiveContainer>
+        <div className="mt-6 space-y-3">
+          {barData.map((item) => (
+            <div key={item.name} className="space-y-2">
+              <div className="flex items-center justify-between text-xs text-white/70">
+                <span>{item.name}</span>
+                <span>{item.value.toFixed(1)} / 5</span>
+              </div>
+              <div className="h-2 w-full rounded-full bg-white/10">
+                <div
+                  className="h-2 rounded-full bg-sand"
+                  style={{ width: `${(item.value / 5) * 100}%` }}
+                />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

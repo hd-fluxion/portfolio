@@ -1,0 +1,10 @@
+{
+  "name": "portfolio-monorepo",
+  "private": true,
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev:site": "npm --workspace apps/site run dev",
+    "dev:demo": "npm --workspace apps/auto-article-demo run dev",
+    "dev": "npm --workspace apps/site run dev"
+  }
+}

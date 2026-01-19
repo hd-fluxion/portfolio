@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <rect width="640" height="360" fill="#0f172a" />
+  <rect x="40" y="40" width="560" height="280" rx="20" fill="#111827" stroke="#38bdf8" stroke-width="2"/>
+  <text x="320" y="140" fill="#e2e8f0" font-size="24" text-anchor="middle" font-family="sans-serif">Instagram Analytics</text>
+  <text x="320" y="190" fill="#94a3b8" font-size="14" text-anchor="middle" font-family="sans-serif">API → GAS → Dashboard</text>
+</svg>

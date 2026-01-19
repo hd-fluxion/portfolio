@@ -23,7 +23,7 @@ export const projects = [
       "運用担当の集計作業を削減（手作業→自動集計）",
       "投稿の改善サイクルを回せるダッシュボード化",
     ],
-    diagram: "/diagrams/instagram-analytics.svg",
+    diagram: "/diagrams/Insatagram_analytics.png",
   },
   {
     period: "2021-2022",
@@ -32,7 +32,7 @@ export const projects = [
       "見積から請求書発行までを一元管理。スプレッドシートで帳票生成・管理し、GAS Webアプリで要望に合わせた業務フローを実装しました。",
     tech: ["GAS", "JavaScript", "HTML", "CSS", "jQuery"],
     outcome: ["帳票作成・転記を削減", "見積〜請求の進捗を見える化"],
-    diagram: "/diagrams/quote-billing.svg",
+    diagram: "/diagrams/Quote_Billing.png",
   },
   {
     period: "2022-2023",
@@ -41,7 +41,7 @@ export const projects = [
       "Excel運用をWebアプリへ移行し、在庫可視化と発注管理を実装。業務の属人化を減らし、ミスを抑える運用に改善しました。",
     tech: ["React", "Node.js", "MySQL", "PHP", "JavaScript"],
     outcome: ["在庫の見える化", "発注タイミングの標準化"],
-    diagram: "/diagrams/inventory.svg",
+    diagram: "/diagrams/Inventry_Management.png",
   },
   {
     period: "2023-2024",
@@ -50,7 +50,7 @@ export const projects = [
       "Difyを活用し、LLMで記事作成を自動化。WordPressと連携して投稿業務を効率化しました。",
     tech: ["Dify", "MySQL", "PHP"],
     outcome: ["記事作成フローの自動化", "運用工数の削減"],
-    diagram: "/diagrams/dify-wp.svg",
+    diagram: "/diagrams/Dify.png",
     link: "https://fluxionworks.com/blog/",
   },
   {
@@ -60,7 +60,7 @@ export const projects = [
       "n8nと自作OAuth2マネージャで複数SNSの自動投稿を実装。投稿忘れ防止と作業効率化を実現しました。",
     tech: ["n8n", "MySQL", "PHP"],
     outcome: ["投稿業務の自動化", "運用の再現性向上"],
-    diagram: "/diagrams/n8n-sns.svg",
+    diagram: "/diagrams/n8n.png",
   },
 ];
 

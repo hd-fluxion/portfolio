@@ -9,16 +9,19 @@ const config: Config = {
         body: ["var(--font-body)", "sans-serif"],
       },
       colors: {
-        ink: "#0b0f1a",
-        haze: "#101827",
-        accent: "#38bdf8",
-        sand: "#f4f1ea",
+        ink: "#f7f4fb",
+        haze: "#f0f5ff",
+        accent: "#7aa7ff",
+        sand: "#f7f6fb",
+        lilac: "#e9e1f6",
+        mint: "#e3f6f1",
+        text: "#2f3242",
       },
       backgroundImage: {
         "hero-glow":
-          "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.2), transparent 45%), radial-gradient(circle at 80% 10%, rgba(244,241,234,0.1), transparent 40%)",
+          "radial-gradient(circle at 20% 20%, rgba(122,167,255,0.35), transparent 50%), radial-gradient(circle at 80% 10%, rgba(233,225,246,0.5), transparent 45%)",
         "grid-faint":
-          "linear-gradient(to right, rgba(148,163,184,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.08) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(99,102,241,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(99,102,241,0.08) 1px, transparent 1px)",
       },
       keyframes: {
         floaty: {

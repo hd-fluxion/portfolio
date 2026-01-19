@@ -1,66 +1,129 @@
-"use client";
-
-import { createElement } from "react";
-import {
-  Radar,
-  RadarChart,
-  PolarGrid,
-  ResponsiveContainer,
-  BarChart,
-  Bar,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-} from "recharts";
-
 type Props = {
   radarData: { name: string; level: number }[];
   barData: { name: string; value: number }[];
 };
 
 export default function SkillsCharts({ radarData, barData }: Props) {
+  const maxValue = 5;
+  const size = 240;
+  const center = size / 2;
+  const radius = size * 0.38;
+  const steps = 4;
+  const count = radarData.length;
+  const angleStep = (Math.PI * 2) / Math.max(count, 1);
+
+  const levelToPoint = (level: number, index: number) => {
+    const angle = -Math.PI / 2 + angleStep * index;
+    const r = (level / maxValue) * radius;
+    return [
+      center + Math.cos(angle) * r,
+      center + Math.sin(angle) * r,
+    ] as const;
+  };
+
+  const polygonPoints = radarData
+    .map((item, index) => levelToPoint(item.level, index).join(","))
+    .join(" ");
+
   return (
     <div className="grid gap-6">
       <div className="glass relative h-72 rounded-2xl p-4">
         <p className="text-xs uppercase tracking-[0.2em] text-white/50">
           Radar Overview
         </p>
-        <div className="h-60">
-          <ResponsiveContainer width="100%" height="100%">
-            <RadarChart data={radarData}>
-              <PolarGrid stroke="#1f2937" />
-              {createElement(Radar as any, {
-                dataKey: "level",
-                stroke: "#38bdf8",
-                fill: "#38bdf8",
-                fillOpacity: 0.35,
-              })}
-            </RadarChart>
-          </ResponsiveContainer>
-        </div>
-        <div className="pointer-events-none absolute inset-0">
-          {radarData.map((item, index) => (
-            <span
-              key={item.name}
-              className={[
-                "absolute text-xs text-white/60",
-                index === 0 && "left-1/2 top-8 -translate-x-1/2",
-                index === 1 && "right-6 top-1/3",
-                index === 2 && "right-8 bottom-10",
-                index === 3 && "left-1/2 bottom-6 -translate-x-1/2",
-                index === 4 && "left-8 bottom-10",
-                index === 5 && "left-6 top-1/3",
-                index === 6 && "right-1/2 top-16 translate-x-1/2",
-                index === 7 && "right-6 bottom-1/3",
-                index === 8 && "left-6 bottom-1/3",
-              ]
-                .filter(Boolean)
-                .join(" ")}
-            >
-              {item.name}
-            </span>
-          ))}
+        <div className="mt-4 flex items-center justify-center">
+          <svg
+            width={size}
+            height={size}
+            viewBox={`0 0 ${size} ${size}`}
+            className="text-white/70"
+          >
+            {Array.from({ length: steps }, (_, step) => {
+              const r = radius * ((step + 1) / steps);
+              const ringPoints = radarData
+                .map((_, index) => {
+                  const angle = -Math.PI / 2 + angleStep * index;
+                  const x = center + Math.cos(angle) * r;
+                  const y = center + Math.sin(angle) * r;
+                  return `${x},${y}`;
+                })
+                .join(" ");
+              return (
+                <polygon
+                  key={`ring-${r}`}
+                  points={ringPoints}
+                  fill="none"
+                  stroke="rgba(148,163,184,0.2)"
+                  strokeWidth="1"
+                />
+              );
+            })}
+            {radarData.map((_, index) => {
+              const angle = -Math.PI / 2 + angleStep * index;
+              const x = center + Math.cos(angle) * radius;
+              const y = center + Math.sin(angle) * radius;
+              return (
+                <line
+                  key={`axis-${index}`}
+                  x1={center}
+                  y1={center}
+                  x2={x}
+                  y2={y}
+                  stroke="rgba(148,163,184,0.35)"
+                  strokeWidth="1"
+                />
+              );
+            })}
+            <polygon
+              points={polygonPoints}
+              fill="rgba(56,189,248,0.35)"
+              stroke="rgba(56,189,248,0.9)"
+              strokeWidth="2"
+            />
+            {radarData.map((item, index) => {
+              const [x, y] = levelToPoint(item.level, index);
+              return (
+                <circle
+                  key={`dot-${item.name}`}
+                  cx={x}
+                  cy={y}
+                  r="3"
+                  fill="rgba(56,189,248,0.9)"
+                />
+              );
+            })}
+            {radarData.map((item, index) => {
+              const angle = -Math.PI / 2 + angleStep * index;
+              const labelRadius = radius + 18;
+              const x = center + Math.cos(angle) * labelRadius;
+              const y = center + Math.sin(angle) * labelRadius;
+              const anchor =
+                Math.abs(Math.cos(angle)) < 0.3
+                  ? "middle"
+                  : Math.cos(angle) > 0
+                  ? "start"
+                  : "end";
+              const dy =
+                Math.abs(Math.sin(angle)) < 0.2
+                  ? 4
+                  : Math.sin(angle) > 0
+                  ? 10
+                  : -4;
+              return (
+                <text
+                  key={`label-${item.name}`}
+                  x={x}
+                  y={y}
+                  textAnchor={anchor}
+                  fontSize="10"
+                  fill="rgba(226,232,240,0.75)"
+                  dy={dy}
+                >
+                  {item.name}
+                </text>
+              );
+            })}
+          </svg>
         </div>
       </div>
       <div className="glass h-72 rounded-2xl p-4">

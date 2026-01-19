@@ -3,6 +3,7 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import StarRating from "@/components/ui/StarRating";
 import { skillGroups } from "@/data/profile";
+import { createElement } from "react";
 import {
   Radar,
   RadarChart,
@@ -82,15 +83,12 @@ export default function Skills() {
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart data={radarData}>
                     <PolarGrid stroke="#1f2937" />
-                    {
-                      // @ts-expect-error recharts types mismatch with React 19
-                      <Radar
-                        dataKey="level"
-                        stroke="#38bdf8"
-                        fill="#38bdf8"
-                        fillOpacity={0.35}
-                      />
-                    }
+                    {createElement(Radar as any, {
+                      dataKey: "level",
+                      stroke: "#38bdf8",
+                      fill: "#38bdf8",
+                      fillOpacity: 0.35,
+                    })}
                   </RadarChart>
                 </ResponsiveContainer>
               </div>

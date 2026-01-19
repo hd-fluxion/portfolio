@@ -3,7 +3,7 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import StarRating from "@/components/ui/StarRating";
 import { skillGroups } from "@/data/profile";
-import type { ComponentType } from "react";
+import { createElement } from "react";
 import {
   Radar,
   RadarChart,
@@ -42,10 +42,6 @@ const barData = skillGroups.map((group) => ({
     group.items.length,
 }));
 
-const SafePolarAngleAxis = PolarAngleAxis as unknown as ComponentType<{
-  dataKey: string;
-  stroke?: string;
-}>;
 
 export default function Skills() {
   return (
@@ -88,7 +84,10 @@ export default function Skills() {
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart data={radarData}>
                     <PolarGrid stroke="#1f2937" />
-                    <SafePolarAngleAxis dataKey="name" stroke="#94a3b8" />
+                    {createElement(PolarAngleAxis as any, {
+                      dataKey: "name",
+                      stroke: "#94a3b8",
+                    })}
                     <Radar
                       dataKey="level"
                       stroke="#38bdf8"

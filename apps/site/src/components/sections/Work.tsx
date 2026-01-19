@@ -32,6 +32,8 @@ export default function Work() {
             <div className="mt-6 flex flex-wrap gap-4">
               <Link
                 href="https://hd-fluxion.github.io/portfolio/demo/"
+                target="_blank"
+                rel="noreferrer"
                 className="rounded-full bg-accent px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink"
               >
                 デモを開く

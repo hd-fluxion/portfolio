@@ -22,7 +22,7 @@ type Props = {
 export default function SkillsCharts({ radarData, barData }: Props) {
   return (
     <div className="grid gap-6">
-      <div className="glass h-72 rounded-2xl p-4">
+      <div className="glass relative h-72 rounded-2xl p-4">
         <p className="text-xs uppercase tracking-[0.2em] text-white/50">
           Radar Overview
         </p>
@@ -38,6 +38,29 @@ export default function SkillsCharts({ radarData, barData }: Props) {
               })}
             </RadarChart>
           </ResponsiveContainer>
+        </div>
+        <div className="pointer-events-none absolute inset-0">
+          {radarData.map((item, index) => (
+            <span
+              key={item.name}
+              className={[
+                "absolute text-xs text-white/60",
+                index === 0 && "left-1/2 top-8 -translate-x-1/2",
+                index === 1 && "right-6 top-1/3",
+                index === 2 && "right-8 bottom-10",
+                index === 3 && "left-1/2 bottom-6 -translate-x-1/2",
+                index === 4 && "left-8 bottom-10",
+                index === 5 && "left-6 top-1/3",
+                index === 6 && "right-1/2 top-16 translate-x-1/2",
+                index === 7 && "right-6 bottom-1/3",
+                index === 8 && "left-6 bottom-1/3",
+              ]
+                .filter(Boolean)
+                .join(" ")}
+            >
+              {item.name}
+            </span>
+          ))}
         </div>
       </div>
       <div className="glass h-72 rounded-2xl p-4">

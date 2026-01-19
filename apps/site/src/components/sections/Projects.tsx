@@ -4,6 +4,7 @@ import SectionHeader from "@/components/ui/SectionHeader";
 import { projects } from "@/data/profile";
 
 export default function Projects() {
+  const basePath = process.env.NODE_ENV === "production" ? "/portfolio" : "";
   return (
     <section id="projects" className="section-pad">
       <div className="mx-auto max-w-6xl">
@@ -50,7 +51,7 @@ export default function Projects() {
               </ul>
               <div className="mt-6 overflow-hidden rounded-xl border border-white/10 bg-black/30 p-4">
                 <Image
-                  src={project.diagram}
+                  src={`${basePath}${project.diagram}`}
                   alt={`${project.title} 構成図`}
                   width={640}
                   height={360}

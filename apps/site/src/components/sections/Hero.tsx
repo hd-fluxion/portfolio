@@ -7,8 +7,8 @@ export default function Hero() {
       <div className="relative mx-auto flex max-w-6xl flex-col gap-10">
         <div className="flex flex-col gap-6">
           <p className="chip">AI × BUSINESS AUTOMATION</p>
-          <h1 className="font-display text-4xl text-sand md:text-6xl">
-            業務に寄り添うAI×自動化で、
+          <h1 className="font-display text-4xl text-text md:text-6xl">
+            <span className="text-accent">業務に寄り添うAI×自動化で、</span>
             <br />
             相談から実装まで一気通貫。
           </h1>

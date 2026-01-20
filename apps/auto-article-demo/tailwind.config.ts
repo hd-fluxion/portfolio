@@ -5,9 +5,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        base: "#0b0f1a",
-        panel: "#111827",
-        accent: "#38bdf8",
+        base: "#f7f4fb",
+        panel: "#ffffff",
+        accent: "#7aa7ff",
+        lilac: "#e9e1f6",
+        mint: "#e3f6f1",
+        text: "#2f3242",
       },
       keyframes: {
         fadeUp: {

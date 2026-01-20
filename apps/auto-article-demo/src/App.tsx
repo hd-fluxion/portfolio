@@ -22,6 +22,7 @@ type DraftData = {
   sections: DraftSection[];
   images: string[];
   meta: string;
+  keyword: string;
 };
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
     Math.random().toString(36).slice(2, 10)
   );
   const [draft, setDraft] = useState<DraftData | null>(null);
+  const [historyOpen, setHistoryOpen] = useState(false);
 
   return (
     <div className="min-h-screen">
@@ -39,16 +41,38 @@ export default function App() {
             <p className="text-xs uppercase tracking-[0.2em] text-white/50">
               Auto Article Demo
             </p>
-            <h1 className="text-lg font-semibold">記事生成フロー UI</h1>
+            <h1 className="text-lg font-semibold text-slate-900">
+              記事生成フロー UI
+            </h1>
+            <p className="mt-1 text-xs text-slate-600">
+              デモのため、AIは入っておりません。イメージを体感してください。
+            </p>
           </div>
-          <button
-            onClick={() =>
-              setMode((prev) => (prev === "wizard" ? "editor" : "wizard"))
-            }
-            className="rounded-full border border-white/20 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/70"
-          >
-            {mode === "wizard" ? "編集画面へ" : "対話フローへ"}
-          </button>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() =>
+                setMode((prev) => (prev === "wizard" ? "editor" : "wizard"))
+              }
+              className="rounded-full border border-white/20 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/70"
+            >
+              {mode === "wizard" ? "編集画面へ" : "対話フローへ"}
+            </button>
+            {mode === "editor" && (
+              <button
+                onClick={() => setHistoryOpen((prev) => !prev)}
+                className="rounded-full border border-white/20 px-3 py-2 text-white/70"
+                aria-label="履歴メニュー"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-5 w-5 fill-current"
+                >
+                  <path d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z" />
+                </svg>
+              </button>
+            )}
+          </div>
         </div>
       </header>
       <main className="w-full px-6 pt-8 pb-20">
@@ -73,12 +97,18 @@ export default function App() {
                 sections,
                 images: sections.map((section) => section.imageUrl),
                 meta: `${payload.keyword}の要点をわかりやすく整理し、実務で使える形にまとめます。`,
+                keyword: payload.keyword,
               });
               setMode("editor");
             }}
           />
         ) : (
-          <Editor sessionId={sessionId} draft={draft ?? undefined} />
+          <Editor
+            sessionId={sessionId}
+            draft={draft ?? undefined}
+            historyOpen={historyOpen}
+            onCloseHistory={() => setHistoryOpen(false)}
+          />
         )}
       </main>
     </div>

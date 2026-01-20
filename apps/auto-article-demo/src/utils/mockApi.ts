@@ -14,6 +14,12 @@ export type ArticleData = {
   sections: ArticleSection[];
 };
 
+export type KeywordInsight = {
+  keyword: string;
+  intent: "Informational" | "Commercial" | "Transactional";
+  audience: string;
+};
+
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const pick = <T>(items: T[]) => items[Math.floor(Math.random() * items.length)];
@@ -47,6 +53,23 @@ export async function generateOutline(
     }
   }
   return outline;
+}
+
+export async function generateKeywordInsights(
+  keyword: string
+): Promise<KeywordInsight[]> {
+  await delay(600);
+  const intents: KeywordInsight["intent"][] = [
+    "Informational",
+    "Commercial",
+    "Transactional",
+  ];
+  const audiences = ["初心者", "実務者", "経営者"];
+  return Array.from({ length: 4 }).map((_, index) => ({
+    keyword: `${keyword} ${["比較", "事例", "ツール", "やり方"][index]}`,
+    intent: intents[index % intents.length],
+    audience: audiences[index % audiences.length],
+  }));
 }
 
 export async function generateArticle(

@@ -42,7 +42,8 @@ export default function StepOutline({ state, onNext, onBack }: Props) {
             Title
           </p>
           <p className="mt-2 text-base text-text">
-            {state.keyword} × {state.genre} 自動化ガイド
+            {state.selectedInsight?.keyword ?? state.keyword} × {state.genre}{" "}
+            自動化ガイド
           </p>
           <p className="mt-4 text-xs uppercase tracking-[0.2em] text-white/50">
             目次

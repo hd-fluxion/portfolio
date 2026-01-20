@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import StepStart from "./StepStart";
 import StepInput from "./StepInput";
 import StepOutline from "./StepOutline";
+import StepKeywordInsights from "./StepKeywordInsights";
 import StepArticle from "./StepArticle";
 import StepImage from "./StepImage";
 import StepComplete from "./StepComplete";
@@ -12,6 +13,16 @@ export interface WizardState {
   keyword: string;
   genre: string;
   length: number;
+  insights: {
+    keyword: string;
+    intent: "Informational" | "Commercial" | "Transactional";
+    audience: string;
+  }[];
+  selectedInsight?: {
+    keyword: string;
+    intent: "Informational" | "Commercial" | "Transactional";
+    audience: string;
+  };
   outline: string[];
   article: ArticleData;
   images: string[];
@@ -20,6 +31,11 @@ export interface WizardState {
 type Action =
   | { type: "SET_STEP"; step: number }
   | { type: "SET_INPUTS"; keyword: string; genre: string; length: number }
+  | {
+      type: "SET_INSIGHTS";
+      insights: WizardState["insights"];
+      selected?: WizardState["selectedInsight"];
+    }
   | { type: "SET_OUTLINE"; outline: string[] }
   | { type: "SET_ARTICLE"; article: ArticleData }
   | { type: "SET_IMAGES"; images: string[] }
@@ -30,6 +46,8 @@ const initialState: WizardState = {
   keyword: "AI×業務効率化",
   genre: "AI",
   length: 2000,
+  insights: [],
+  selectedInsight: undefined,
   outline: [],
   article: { title: "", sections: [] },
   images: [],
@@ -45,6 +63,12 @@ function reducer(state: WizardState, action: Action): WizardState {
         keyword: action.keyword,
         genre: action.genre,
         length: action.length,
+      };
+    case "SET_INSIGHTS":
+      return {
+        ...state,
+        insights: action.insights,
+        selectedInsight: action.selected ?? state.selectedInsight,
       };
     case "SET_OUTLINE":
       return { ...state, outline: action.outline };
@@ -71,7 +95,9 @@ type WizardProps = {
 
 export default function Wizard({ onComplete }: WizardProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const stepLabel = `Step ${state.step} / 5`;
+  const stepLabel = `Step ${state.step} / 6`;
+  const effectiveKeyword =
+    state.selectedInsight?.keyword ?? state.keyword;
 
   return (
     <div className="w-full">
@@ -94,35 +120,48 @@ export default function Wizard({ onComplete }: WizardProps) {
           />
         )}
         {state.step === 2 && (
-          <StepOutline
+          <StepKeywordInsights
             state={state}
-            onBack={() => dispatch({ type: "SET_STEP", step: 1 })}
-            onNext={(outline) => {
-              dispatch({ type: "SET_OUTLINE", outline });
+            onNext={(insights, selected) => {
+              dispatch({ type: "SET_INSIGHTS", insights, selected });
               dispatch({ type: "SET_STEP", step: 3 });
             }}
+            onBack={() => dispatch({ type: "SET_STEP", step: 1 })}
           />
         )}
         {state.step === 3 && (
-          <StepArticle
-            state={state}
+          <StepOutline
+            state={{
+              ...state,
+              keyword: effectiveKeyword,
+            }}
             onBack={() => dispatch({ type: "SET_STEP", step: 2 })}
-            onNext={(article) => {
-              dispatch({ type: "SET_ARTICLE", article });
+            onNext={(outline) => {
+              dispatch({ type: "SET_OUTLINE", outline });
               dispatch({ type: "SET_STEP", step: 4 });
             }}
           />
         )}
         {state.step === 4 && (
-          <StepImage
+          <StepArticle
             state={state}
-            onNext={(images) => {
-              dispatch({ type: "SET_IMAGES", images });
+            onBack={() => dispatch({ type: "SET_STEP", step: 3 })}
+            onNext={(article) => {
+              dispatch({ type: "SET_ARTICLE", article });
               dispatch({ type: "SET_STEP", step: 5 });
             }}
           />
         )}
         {state.step === 5 && (
+          <StepImage
+            state={state}
+            onNext={(images) => {
+              dispatch({ type: "SET_IMAGES", images });
+              dispatch({ type: "SET_STEP", step: 6 });
+            }}
+          />
+        )}
+        {state.step === 6 && (
           <StepComplete
             onComplete={() =>
               onComplete({

@@ -31,7 +31,7 @@ export default function Work() {
             </ol>
             <div className="mt-6 flex flex-wrap gap-4">
               <Link
-                href="https://hd-fluxion.github.io/auto-article-demo/"
+                href="https://hd-fluxion.github.io/portfolio/demo/"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-full bg-accent px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink"
@@ -46,7 +46,7 @@ export default function Work() {
               </Link>
             </div>
             <p className="mt-4 text-xs text-white/50">
-              ※ デモは別リポジトリで管理し、公開URLへリンクしています。
+              ※ デモはポートフォリオのGitHub Pages上で公開しています。
             </p>
           </div>
           <div className="glass rounded-2xl p-6">

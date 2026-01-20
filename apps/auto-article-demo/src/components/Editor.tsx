@@ -3,6 +3,7 @@ import SEOAssistantPanel from "./SEOAssistantPanel";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
+const DEMO_LIMITED = import.meta.env.VITE_DEMO_LIMITED !== "false";
 
 type H3Block = {
   id: string;
@@ -482,6 +483,11 @@ export default function Editor({
             onChange={(event) => setTitle(event.target.value)}
             className="mt-2 w-full rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-lg"
           />
+          {DEMO_LIMITED && (
+            <p className="mt-2 text-xs text-white/50">
+              デモ版のため SEO チェッカーと WordPress プレビューは非表示です。
+            </p>
+          )}
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
@@ -490,14 +496,16 @@ export default function Editor({
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                setPreviewOpen(true);
-              }}
-              className="rounded-full bg-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-base"
-            >
-              WordPress投稿
-            </button>
+            {!DEMO_LIMITED && (
+              <button
+                onClick={() => {
+                  setPreviewOpen(true);
+                }}
+                className="rounded-full bg-accent px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-base"
+              >
+                WordPress投稿
+              </button>
+            )}
           </div>
         </div>
         <div className="mt-6 space-y-4">
@@ -833,31 +841,33 @@ export default function Editor({
             AI修正
           </button>
         </div>
-        <div className="mt-6">
-          <SEOAssistantPanel
-            keyword={draft?.keyword ?? title}
-            title={title}
-            metaDescription={meta}
-            headings={[
-              { level: "H1", text: title },
-              ...sections.map((section) => ({
-                level: "H2" as const,
-                text: section.title,
-              })),
-              ...sections.flatMap((section) =>
-                section.h3.map((item) => ({
-                  level: "H3" as const,
-                  text: item.title,
-                }))
-              ),
-            ]}
-            articleContent={sections
-              .map((section) =>
-                [section.body, ...section.h3.map((item) => item.body)].join("\n")
-              )
-              .join("\n\n")}
-          />
-        </div>
+        {!DEMO_LIMITED && (
+          <div className="mt-6">
+            <SEOAssistantPanel
+              keyword={draft?.keyword ?? title}
+              title={title}
+              metaDescription={meta}
+              headings={[
+                { level: "H1", text: title },
+                ...sections.map((section) => ({
+                  level: "H2" as const,
+                  text: section.title,
+                })),
+                ...sections.flatMap((section) =>
+                  section.h3.map((item) => ({
+                    level: "H3" as const,
+                    text: item.title,
+                  }))
+                ),
+              ]}
+              articleContent={sections
+                .map((section) =>
+                  [section.body, ...section.h3.map((item) => item.body)].join("\n")
+                )
+                .join("\n\n")}
+            />
+          </div>
+        )}
       </aside>
       {historyOpen && (
         <div className="absolute right-4 top-4 z-10 w-72 rounded-2xl border border-white/10 bg-panel p-4 shadow-xl">
@@ -905,7 +915,7 @@ export default function Editor({
           </div>
         </div>
       )}
-      {previewOpen && (
+      {!DEMO_LIMITED && previewOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-6">
           <div className="max-h-[90vh] w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-white">
             <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">

@@ -50,3 +50,18 @@ php -S localhost:8000 -t backend/php-api/public
 - OpenAI等のキーはフロントに置かず、PHP APIでのみ保持します。
 - `.env` はGitHubにコミットしないでください。
 - `DEMO_MODE=true` の場合はダミー応答で動作します。
+
+## 7. GitHub Pages (サイト + デモ)
+
+- ポートフォリオ: `https://hd-fluxion.github.io/portfolio/`
+- デモアプリ: `https://hd-fluxion.github.io/portfolio/demo/`
+
+### デモ版の機能制限
+
+- SEOチェッカーとWordPressプレビューを非表示にする場合は以下の環境変数を使います。
+
+```bash
+VITE_DEMO_LIMITED=true
+```
+
+- 正式版に戻す場合は `VITE_DEMO_LIMITED=false` にしてください。

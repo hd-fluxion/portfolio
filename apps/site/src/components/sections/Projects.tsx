@@ -28,7 +28,7 @@ export default function Projects() {
                   </Link>
                 )}
               </div>
-              <h3 className="mt-3 font-display text-xl text-sand">
+              <h3 className="mt-3 font-display text-xl text-white/50">
                 {project.title}
               </h3>
               <p className="mt-3 text-sm text-white/70">

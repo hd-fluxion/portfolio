@@ -10,7 +10,9 @@ export default function StepComplete({ onComplete, onReset }: Props) {
         <p className="text-xs uppercase tracking-[0.2em] text-white/50">
           Step 5
         </p>
-        <h2 className="mt-3 text-2xl font-semibold">準備完了</h2>
+        <h2 className="mt-3 text-2xl font-semibold text-slate-800">
+          準備完了
+        </h2>
       </div>
       <p className="text-sm text-white/70">
         記事と画像が揃いました。編集画面で最終調整を行います。

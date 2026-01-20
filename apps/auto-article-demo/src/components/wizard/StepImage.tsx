@@ -26,7 +26,7 @@ export default function StepImage({ state, onNext }: Props) {
         <p className="text-xs uppercase tracking-[0.2em] text-white/50">
           Step 4
         </p>
-        <h2 className="mt-3 text-xl font-semibold">画像生成</h2>
+        <h2 className="mt-3 text-xl font-semibold text-slate-600">画像生成</h2>
       </div>
       {loading ? (
         <div className="flex items-center gap-3 text-sm text-white/70">

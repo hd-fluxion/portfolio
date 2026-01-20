@@ -24,7 +24,9 @@ export default function StepInput({
         <p className="text-xs uppercase tracking-[0.2em] text-white/50">
           Step 1
         </p>
-        <h2 className="mt-3 text-xl font-semibold">記事条件入力</h2>
+        <h2 className="mt-3 text-xl font-semibold text-slate-600">
+          記事条件入力
+        </h2>
       </div>
       <div className="grid gap-4 md:grid-cols-3">
         <label className="block">

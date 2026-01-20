@@ -42,7 +42,7 @@ export default function App() {
           </button>
         </div>
       </header>
-      <main className="w-full px-6 py-8">
+      <main className="w-full px-6 pt-8 pb-20">
         {mode === "wizard" ? (
           <WizardPage
             onComplete={(payload) => {

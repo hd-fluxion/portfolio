@@ -41,7 +41,9 @@ export default function Hero() {
             },
           ].map((item) => (
             <div key={item.title} className="glass rounded-2xl p-6">
-              <h3 className="font-display text-lg text-sand">{item.title}</h3>
+              <h3 className="font-display text-lg text-white/50">
+                {item.title}
+              </h3>
               <p className="mt-3 text-sm text-white/70">{item.text}</p>
             </div>
           ))}

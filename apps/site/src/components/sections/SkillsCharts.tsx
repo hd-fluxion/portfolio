@@ -116,7 +116,7 @@ export default function SkillsCharts({ radarData, barData }: Props) {
                   y={y}
                   textAnchor={anchor}
                   fontSize="10"
-                  fill="rgba(226,232,240,0.75)"
+                  fill="rgba(47,50,66,0.8)"
                   dy={dy}
                 >
                   {item.name}

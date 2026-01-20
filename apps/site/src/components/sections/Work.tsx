@@ -20,7 +20,7 @@ export default function Work() {
         />
         <div className="grid gap-8 lg:grid-cols-[1.1fr_1fr]">
           <div className="glass rounded-2xl p-6">
-            <h3 className="font-display text-xl text-sand">デモの流れ</h3>
+            <h3 className="font-display text-xl text-white/50">デモの流れ</h3>
             <ol className="mt-4 space-y-3 text-sm text-white/70">
               {steps.map((step) => (
                 <li key={step} className="flex gap-3">
@@ -50,7 +50,7 @@ export default function Work() {
             </p>
           </div>
           <div className="glass rounded-2xl p-6">
-            <h3 className="font-display text-xl text-sand">ポイント</h3>
+            <h3 className="font-display text-xl text-white/50">ポイント</h3>
             <ul className="mt-4 space-y-3 text-sm text-white/70">
               <li>フロントにAPIキーを置かず、PHP API経由で安全に連携</li>
               <li>編集画面は履歴/記事/AI補正を3カラムで管理</li>

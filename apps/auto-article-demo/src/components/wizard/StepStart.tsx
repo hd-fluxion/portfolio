@@ -9,7 +9,7 @@ export default function StepStart({ onNext }: Props) {
         <p className="text-xs uppercase tracking-[0.2em] text-white/50">
           Step 0
         </p>
-        <h2 className="mt-3 text-2xl font-semibold">
+        <h2 className="mt-3 text-2xl font-semibold text-slate-800">
           AI オート記事作成ツール
         </h2>
       </div>

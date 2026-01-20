@@ -27,7 +27,9 @@ export default function StepOutline({ state, onNext, onBack }: Props) {
         <p className="text-xs uppercase tracking-[0.2em] text-white/50">
           Step 2
         </p>
-        <h2 className="mt-3 text-xl font-semibold">記事構成の作成</h2>
+        <h2 className="mt-3 text-xl font-semibold text-slate-600">
+          記事構成の作成
+        </h2>
       </div>
       {loading ? (
         <div className="flex items-center gap-3 text-sm text-white/70">

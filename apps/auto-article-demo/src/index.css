@@ -7,6 +7,12 @@ body {
   color: #2f3242;
 }
 
+input,
+textarea,
+select {
+  color: #2f3242;
+}
+
 .text-white\/80 {
   color: rgba(47, 50, 66, 0.8) !important;
 }

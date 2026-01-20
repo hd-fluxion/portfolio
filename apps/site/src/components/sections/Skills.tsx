@@ -41,7 +41,7 @@ export default function Skills() {
           <div className="space-y-6">
             {skillGroups.map((group) => (
               <div key={group.name} className="glass rounded-2xl p-6">
-                <h3 className="font-display text-lg text-sand">
+                <h3 className="font-display text-lg text-white/50">
                   {group.name}
                 </h3>
                 <div className="mt-4 space-y-4">

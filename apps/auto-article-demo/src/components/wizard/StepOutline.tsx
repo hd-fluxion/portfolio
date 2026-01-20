@@ -39,6 +39,12 @@ export default function StepOutline({ state, onNext, onBack }: Props) {
       ) : (
         <div className="rounded-xl border border-white/10 bg-black/30 p-4 text-sm text-white/80">
           <p className="text-xs uppercase tracking-[0.2em] text-white/50">
+            Title
+          </p>
+          <p className="mt-2 text-base text-text">
+            {state.keyword} × {state.genre} 自動化ガイド
+          </p>
+          <p className="mt-4 text-xs uppercase tracking-[0.2em] text-white/50">
             目次
           </p>
           <ul className="mt-3 space-y-2">

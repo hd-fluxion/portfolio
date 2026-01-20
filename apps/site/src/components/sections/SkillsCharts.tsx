@@ -137,9 +137,9 @@ export default function SkillsCharts({ radarData, barData }: Props) {
                 <span>{item.name}</span>
                 <span>{item.value.toFixed(1)} / 5</span>
               </div>
-              <div className="h-2 w-full rounded-full bg-white/10">
+              <div className="h-2 w-full rounded-full bg-slate-300/60">
                 <div
-                  className="h-2 rounded-full bg-sand"
+                  className="h-2 rounded-full bg-accent"
                   style={{ width: `${(item.value / 5) * 100}%` }}
                 />
               </div>

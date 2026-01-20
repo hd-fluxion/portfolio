@@ -38,18 +38,24 @@ export default function StepArticle({ state, onNext, onBack }: Props) {
       ) : (
         <div className="rounded-xl border border-white/10 bg-black/30 p-4 text-sm text-white/80">
           <p className="text-xs uppercase tracking-[0.2em] text-white/50">
-            {article.title}
+            H1
           </p>
-          <div className="mt-3 space-y-4">
+          <p className="mt-2 text-base text-text">{article.title}</p>
+          <div className="mt-4 space-y-5">
             {article.sections.map((section) => (
               <div key={section.h2}>
-                <p className="text-sm font-semibold text-white">{section.h2}</p>
-                <ul className="mt-2 space-y-1 text-xs text-white/60">
-                  {section.h3.map((item) => (
-                    <li key={item}>- {item}</li>
-                  ))}
-                </ul>
+                <p className="text-sm font-semibold text-text">H2: {section.h2}</p>
                 <p className="mt-2 text-xs text-white/70">{section.body}</p>
+                <div className="mt-3 space-y-3">
+                  {section.h3.map((item) => (
+                    <div key={item.title}>
+                      <p className="text-xs font-semibold text-slate-600">
+                        H3: {item.title}
+                      </p>
+                      <p className="mt-1 text-xs text-white/70">{item.body}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>

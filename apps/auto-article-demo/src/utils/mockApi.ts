@@ -1,7 +1,12 @@
+export type ArticleH3 = {
+  title: string;
+  body: string;
+};
+
 export type ArticleSection = {
   h2: string;
-  h3: string[];
   body: string;
+  h3: ArticleH3[];
 };
 
 export type ArticleData = {
@@ -54,20 +59,32 @@ export async function generateArticle(
   outline.forEach((line) => {
     if (line.startsWith("H2:")) {
       if (current) sections.push(current);
-      current = { h2: line.replace("H2:", "").trim(), h3: [], body: "" };
+      current = {
+        h2: line.replace("H2:", "").trim(),
+        body: "",
+        h3: [],
+      };
     } else if (line.startsWith("H3:")) {
-      current?.h3.push(line.replace("H3:", "").trim());
+      current?.h3.push({ title: line.replace("H3:", "").trim(), body: "" });
     }
   });
   if (current) sections.push(current);
 
   const bodyLength = Math.max(100, Math.min(200, Math.floor(length / 20)));
   const filled = sections.map((section) => {
-    const paragraphs = section.h3.length || 2;
-    const body = Array.from({ length: paragraphs })
+    const h2Body = makeSentence(section.h2, Math.floor(bodyLength / 30));
+    const h3Items = section.h3.map((item) => ({
+      ...item,
+      body: makeSentence(item.title, Math.floor(bodyLength / 20)),
+    }));
+    const fallback = Array.from({ length: 2 })
       .map(() => makeSentence(section.h2, Math.floor(bodyLength / 20)))
       .join("\n\n");
-    return { ...section, body };
+    return {
+      ...section,
+      body: h2Body,
+      h3: h3Items.length > 0 ? h3Items : [{ title: "概要", body: fallback }],
+    };
   });
 
   return {

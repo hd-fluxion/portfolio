@@ -2,10 +2,19 @@ import { useState } from "react";
 import WizardPage from "./pages/WizardPage";
 import Editor from "./components/Editor";
 
+type DraftH3 = {
+  id: string;
+  title: string;
+  body: string;
+};
+
 type DraftSection = {
   id: string;
   title: string;
   body: string;
+  h3: DraftH3[];
+  imageUrl: string;
+  imagePosition: "top" | "middle" | "bottom";
 };
 
 type DraftData = {
@@ -44,23 +53,25 @@ export default function App() {
       </header>
       <main className="w-full px-6 pt-8 pb-20">
         {mode === "wizard" ? (
-          <WizardPage
+      <WizardPage
             onComplete={(payload) => {
+              const fallbackImage = "https://placehold.co/600x400?text=Article+Image";
               const sections = payload.article.sections.map((section, index) => ({
                 id: `s${index + 1}`,
                 title: section.h2,
                 body: section.body,
+                h3: section.h3.map((item, hIndex) => ({
+                  id: `s${index + 1}-h3-${hIndex + 1}`,
+                  title: item.title,
+                  body: item.body,
+                })),
+                imageUrl: payload.images[index] ?? fallbackImage,
+                imagePosition: "top",
               }));
               setDraft({
                 title: payload.article.title || "AI×業務効率化の進め方",
                 sections,
-                images:
-                  payload.images.length > 0
-                    ? payload.images
-                    : sections.map(
-                        () =>
-                          "https://placehold.co/600x400?text=Article+Image"
-                      ),
+                images: sections.map((section) => section.imageUrl),
                 meta: `${payload.keyword}の要点をわかりやすく整理し、実務で使える形にまとめます。`,
               });
               setMode("editor");

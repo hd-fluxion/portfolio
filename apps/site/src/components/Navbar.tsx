@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-ink/80 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-12">
-        <Link href="#" className="font-display text-lg tracking-wide text-sand">
+        <Link href="#" className="font-display text-lg tracking-wide text-text">
           H.D Portfolio
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-white/70 md:flex">

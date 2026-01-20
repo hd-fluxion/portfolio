@@ -10,7 +10,7 @@ export default function SectionHeader({
   return (
     <div className="mb-10">
       <p className="chip">{eyebrow}</p>
-      <h2 className="mt-4 font-display text-3xl text-sand md:text-4xl">
+      <h2 className="mt-4 font-display text-3xl text-text md:text-4xl">
         {title}
       </h2>
       <p className="mt-4 max-w-2xl text-sm text-white/70 md:text-base">

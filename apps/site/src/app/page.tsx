@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-ink text-zinc-50">
+    <main className="min-h-screen bg-ink text-text">
       <Navbar />
       <Hero />
       <About />

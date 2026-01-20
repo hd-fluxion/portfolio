@@ -12,7 +12,7 @@ export default function About() {
         />
         <div className="grid gap-10 lg:grid-cols-3">
           <div className="glass rounded-2xl p-6 lg:col-span-2">
-            <p className="text-lg text-sand">{profile.name}</p>
+            <p className="text-lg text-text">{profile.name}</p>
             <p className="mt-2 text-sm text-white/70">
               {profile.born} / {profile.location}
             </p>
@@ -28,7 +28,7 @@ export default function About() {
             <ul className="mt-4 space-y-4 text-sm">
               {profile.timeline.map((item) => (
                 <li key={item.year} className="flex gap-4">
-                  <span className="text-sand">{item.year}</span>
+                  <span className="text-text">{item.year}</span>
                   <span className="text-white/70">{item.text}</span>
                 </li>
               ))}

@@ -15,11 +15,11 @@ const body = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Hiroyuki Dazai | AI×業務効率化のフルスタック開発",
+  title: "H.D | AI×業務効率化のフルスタック開発",
   description:
     "AI×業務効率化の設計から実装まで。業務フローに寄り添い、成果につながるシステムをつくります。",
   openGraph: {
-    title: "Hiroyuki Dazai | AI×業務効率化のフルスタック開発",
+    title: "H.D | AI×業務効率化のフルスタック開発",
     description:
       "AI×業務効率化の設計から実装まで。業務フローに寄り添い、成果につながるシステムをつくります。",
     type: "website",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hiroyuki Dazai | AI×業務効率化のフルスタック開発",
+    title: "H.D | AI×業務効率化のフルスタック開発",
     description:
       "AI×業務効率化の設計から実装まで。業務フローに寄り添い、成果につながるシステムをつくります。",
     images: ["/og.svg"],
